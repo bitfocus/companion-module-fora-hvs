@@ -1,6 +1,6 @@
 {
 	"name": "fora-hvs",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"description": "For.A Hanabi Video Switcher module for Companion.",
 	"main": "index.js",
 	"scripts": {
@@ -14,8 +14,5 @@
 	],
 	"manufacturer": "For.A",
 	"product": "Hanabi Video Switchers",
-	"shortname": "fora-hvs",
-	"dependencies": {
-		"ws": "^7.2.1"
-	}
+	"shortname": "fora-hvs"
 }

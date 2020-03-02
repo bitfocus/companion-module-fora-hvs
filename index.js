@@ -1,11 +1,11 @@
 const instance_skel = require('../../instance_skel');
-const WebSocket = require('ws');
+const WebSocket = require('websocket').client;
 
 /**
  * Companion instance for controling For.A Hanabi Switchers
  *
  * @extends instance_skel
- * @version 1.0.0
+ * @version 1.0.2
  * @since 1.0.0
  * @author Michael Allen <michael.allen@barefootchurch.com>
  */
@@ -361,47 +361,51 @@ class instance extends instance_skel {
 			clearTimeout(this.reconnecting);
 			this.reconnecting = null;
 		}
-		if(this.socket) { // already connected
+		if(this.socket && this.socket.connected) { // already connected
 			this.disconnect();
 		}
 		if(!this.config.host) { // don't know where to connect to
 			return;
 		}
 
-		this.socket = new WebSocket(
-			`ws://${this.config.host}:8621/`,
-			{ origin: `http://${this.config.host}:8621` }
-		);
+		this.socketClient = new WebSocket();
 
-		this.socket
-			.on('open', () => {
-				this.debug('Opened websocket');
+		this.socketClient
+			.on('connect', webSocketConnection => {
+				this.debug('Websocket connected');
 				this.status(this.STATUS_OK);
+				this.socket = webSocketConnection;
+				this.socket
+					.on('message', message => {
+						if (message.type == 'utf8') {
+							message.utf8Data
+								.split(',')
+								.map(item => item.trim())
+								.forEach(item => {
+									this.debug(`Data recieved: "${item}"`);
+									if (/^ME_XPT_.+:\d+$/.test(item)) {
+										this.processXptChange(item);
+									} else if (/^M1K[1-4]_KEYONAIR:\d$/.test(item)) {
+										this.processKeyChange(item);
+									}
+								});
+						}
+					})
+					.on('error', error => {
+						this.debug(`Socket error: ${error}`);
+					})
+					.on('close', (reasonCode, description) => {
+						this.debug(`Socket closed: [${reasonCode}]-${description}`);
+						this.reconnect.bind(this, true);
+					});
 				this.socket.send(this.COMMAND.GET_STATE); // Get the initial state data
 			})
-			.on('message', data => {
-				if (typeof data === 'string') {
-					data
-						.split(',')
-						.map(item => item.trim())
-						.forEach(item => {
-							this.debug(`Data recieved: "${item}"`);
-							if (/^ME_XPT_.+:\d+$/.test(item)) {
-								this.processXptChange(item);
-							} else if (/^M1K[1-4]_KEYONAIR:\d$/.test(item)) {
-								this.processKeyChange(item);
-							}
-						});
-				}
-			})
-			.on('error', data => {
-				this.debug('Socket error');
-				this.reconnect.bind(this, true);
-			})
-			.on('close', () => {
-				this.debug('Socket closed');
-				this.reconnect.bind(this);
+			.on('connectFailed', errorDescription => {
+				this.debug(`Websocket connection failed: ${errorDescription}`);
+				this.status(this.STATUS_ERROR);
 			});
+
+			this.socketClient.connect(`ws://${this.config.host}:8621/`, null, `http://${this.config.host}`);
 	}
 
 	/**
@@ -429,7 +433,7 @@ class instance extends instance_skel {
 		if(this.reconnecting) {
 			return;
 		}
-		this.log('info', 'Attempting to reconnect in ' + timeout + ' seconds.');
+		this.log('info', `Attempting to reconnect in ${timeout} seconds.`);
 		this.reconnecting = setTimeout(this.connect.bind(this, true), timeout * 1000);
 	}
 
@@ -483,11 +487,12 @@ class instance extends instance_skel {
 	 * @since 1.0.0
 	 */
 	sendCommand(command) {
-		if(this.socket == null) {
-			this.reconnect();
+		if(!this.socket || !this.socket.connected) {
+			this.reconnect.bind(this, true);
+			return;
 		}
 		this.debug(`Sending command: ${command}`);
-		this.socket.send(command);
+		this.socket.sendUTF(command);
 	}
 
 	/**
@@ -505,7 +510,7 @@ class instance extends instance_skel {
 	 * @since 1.0.0
 	 */
 	disconnect() {
-		if(this.socket != null) {
+		if(!this.socket) {
 			this.status(this.STATUS_ERROR);
 			this.socket.close();
 			this.socket = null;
