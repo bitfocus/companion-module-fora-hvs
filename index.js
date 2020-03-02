@@ -5,7 +5,6 @@ const WebSocket = require('websocket').client;
  * Companion instance for controling For.A Hanabi Switchers
  *
  * @extends instance_skel
- * @version 1.0.2
  * @since 1.0.0
  * @author Michael Allen <michael.allen@barefootchurch.com>
  */
