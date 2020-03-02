@@ -1,21 +1,21 @@
 {
-  "name": "fora-hvs100",
-  "version": "1.0.0",
-  "description": "For.A Hanabi HVS-100/110 module for Companion.",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "Michael Allen <michael.allen@barefootchurch.com>",
-  "license": "MIT",
-  "keywords": [
-    "Vision Mixer",
-    "Video Switcher"
-  ],
-  "manufacturer": "For.A",
-  "product": "Hanabi HVS-100/110",
-  "shortname": "hvs-100",
-  "dependencies": {
-    "ws": "^7.2.1"
-  }
+	"name": "fora-hvs",
+	"version": "1.0.1",
+	"description": "For.A Hanabi HVS-100/110 module for Companion.",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"author": "Michael Allen <michael.allen@barefootchurch.com>",
+	"license": "MIT",
+	"keywords": [
+		"Vision Mixer",
+		"Video Switcher"
+	],
+	"manufacturer": "For.A",
+	"product": "Hanabi HVS-100/110",
+	"shortname": "hvs-100",
+	"dependencies": {
+		"ws": "^7.2.1"
+	}
 }
