@@ -510,10 +510,9 @@ class instance extends instance_skel {
 	 * @since 1.0.0
 	 */
 	disconnect() {
-		if(!this.socket) {
-			this.status(this.STATUS_ERROR);
+		this.status(this.STATUS_ERROR);
+		if(this.socket && this.socket.connected) {
 			this.socket.close();
-			this.socket = null;
 		}
 	}
 
