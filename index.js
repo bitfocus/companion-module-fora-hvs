@@ -357,6 +357,7 @@ class instance extends instance_skel {
 	 * @since 1.0.0
 	 */
 	connect() {
+		this.log('info', 'Attempting to connect to switcher');
 		if(this.reconnecting) { // existing reconnect attempt
 			clearTimeout(this.reconnecting);
 			this.reconnecting = null;
@@ -373,7 +374,9 @@ class instance extends instance_skel {
 		this.socketClient
 			.on('connect', webSocketConnection => {
 				this.debug('Websocket connected');
+				this.log('info', 'Switcher conected');
 				this.status(this.STATUS_OK);
+
 				this.socket = webSocketConnection;
 				this.socket
 					.on('message', message => {
@@ -396,12 +399,14 @@ class instance extends instance_skel {
 					})
 					.on('close', (reasonCode, description) => {
 						this.debug(`Socket closed: [${reasonCode}]-${description}`);
+						this.log('info', 'Disconnected from switcher');
 						this.reconnect.bind(this, true);
 					});
 				this.socket.send(this.COMMAND.GET_STATE); // Get the initial state data
 			})
 			.on('connectFailed', errorDescription => {
 				this.debug(`Websocket connection failed: ${errorDescription}`);
+				this.log('warning', 'Connection to switcher failed');
 				this.status(this.STATUS_ERROR);
 			});
 
@@ -414,6 +419,7 @@ class instance extends instance_skel {
 	 * @since 1.0.0
 	 */
 	reconnect(retry_immediately = false) {
+		this.log('info', 'Attempting to reconnect to switcher');
 		this.status(this.STATUS_ERROR);
 		this.disconnect();
 
@@ -488,6 +494,7 @@ class instance extends instance_skel {
 	 */
 	sendCommand(command) {
 		if(!this.socket || !this.socket.connected) {
+			this.log('warning', 'Switcher not connected');
 			this.reconnect.bind(this, true);
 			return;
 		}
@@ -510,6 +517,7 @@ class instance extends instance_skel {
 	 * @since 1.0.0
 	 */
 	disconnect() {
+		this.log('info', 'Disconnecting from switcher');
 		this.status(this.STATUS_ERROR);
 		if(this.socket && this.socket.connected) {
 			this.socket.close();
