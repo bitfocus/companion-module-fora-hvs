@@ -30,7 +30,8 @@ class instance extends instance_skel {
 		});
 
 		// Upgrade scripts
-		this.addUpgradeScript(upgrades.upgradeV1x1x0);
+		this.addUpgradeScript(upgrades.upgradeV1x1);
+		this.addUpgradeScript(upgrades.upgradeV1x2);
 	}
 
 	/**
