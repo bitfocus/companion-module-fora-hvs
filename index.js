@@ -2,6 +2,7 @@ const instance_skel = require("../../instance_skel");
 const WebSocket = require("websocket").client;
 
 let actions = require("./actions");
+let upgrades = require("./upgrades");
 
 /**
  * Companion instance for controling For.A Hanabi Switchers
@@ -27,6 +28,9 @@ class instance extends instance_skel {
 		Object.assign(this, {
 			...actions,
 		});
+
+		// Upgrade scripts
+		this.addUpgradeScript(upgrades.upgradeV1x1x0);
 	}
 
 	/**
