@@ -21,7 +21,10 @@ class instance extends instance_skel {
 
 		this.RECONNECT_TIMEOUT = 15; // Number of seconds to wait before reconnect
 		this.REBOOT_WAIT_TIME = 120; // Number of seconds to wait until next login after reboot
-		this.MODELS = [{ id: "HVS100", label: "HVS 100/110" }];
+		this.MODELS = [
+			{ id: "HVS100", label: "HVS 100/110" },
+			{ id: "HVS2000", label: "HVS 2000" },
+		];
 
 		this.reconnecting = null;
 

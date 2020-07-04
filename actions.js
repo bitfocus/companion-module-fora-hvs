@@ -1,7 +1,9 @@
 let protocol_hvs100 = require("./protocol_hvs100");
+let protocol_hvs2000 = require("./protocol_hvs2000");
 
 let protocol = {
 	...protocol_hvs100,
+	...protocol_hvs2000,
 };
 
 module.exports = {
