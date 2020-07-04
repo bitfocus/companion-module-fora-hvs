@@ -45,8 +45,22 @@ module.exports = {
 			tooltip:
 				"If the switcher drops the connection, this action will reconnect.",
 		};
-		actions["trans_auto"] = { label: "Auto Transition" };
-		actions["trans_cut"] = { label: "Cut Transition" };
+		actions["trans_me"] = {
+			label: "Transition ME",
+			options: [
+				{
+					type: "dropdown",
+					label: "Type",
+					id: "type",
+					required: true,
+					default: "CUT",
+					choices: [
+						{ id: "AUTO", label: "Auto" },
+						{ id: "CUT", label: "Cut" },
+					],
+				},
+			]
+		};
 		actions["xpt_aux"] = {
 			label: "Set AUX",
 			options: [
@@ -137,11 +151,8 @@ module.exports = {
 				command = protocol[model].COMMANDS.RECALL_EVENT
 					.replace( "{event}", eventHex);
 				break;
-			case "trans_auto":
-				command = protocol[model].COMMANDS.TRANS_AUTO;
-				break;
-			case "trans_cut":
-				command = protocol[model].COMMANDS.TRANS_CUT;
+			case "trans_me":
+				command = protocol[model].COMMANDS[`TRANS_ME_${options.type}`];
 				break;
 			case "xpt_me":
 				command = protocol[model].COMMANDS.XPT_ME
