@@ -7,7 +7,7 @@ module.exports = {
 			RECALL_EVENT: "CMD.030502{event}", // event[0-99]: 2-digit hex for the selected event
 			TRANS_AUTO: "SET.ME_XPT_ME1_BKGD_TRS_AUTO_STAT:1",
 			TRANS_CUT: "SET.ME_XPT_ME1_BKGD_TRS_AUTO_STAT:3",
-			XPT_ME1: "SET.ME_XPT_ME1_BKGD_{layer}:{source}", // layer: [A=PGM,B=PVW] which layer to set; source: id of the selected source
+			XPT_ME: "SET.ME_XPT_ME{me}_BKGD_{layer}:{source}", // layer: [A=PGM,B=PVW] which layer to set; source: id of the selected source
 			XPT_AUX: "SET.ME_XPT_AUX{aux}:{source}", // aux[1-8]: which aux to set; source: id of the selected source
 		},
 		AUXES: [
@@ -19,6 +19,9 @@ module.exports = {
 			{ id: 6, label: "Aux 6" },
 			{ id: 7, label: "Aux 7" },
 			{ id: 8, label: "Aux 8" },
+		],
+		MES: [
+			{ id: 1, label: "ME 1" },
 		],
 		SOURCES_ME: [
 			// Built-in Inputs

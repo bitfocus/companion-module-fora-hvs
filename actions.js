@@ -70,9 +70,17 @@ module.exports = {
 				},
 			],
 		};
-		actions["xpt_me1"] = {
-			label: "Set ME1",
+		actions["xpt_me"] = {
+			label: "Set ME",
 			options: [
+				{
+					type: "dropdown",
+					label: "ME",
+					id: "me",
+					required: true,
+					default: 1,
+					choices: protocol[model].MES,
+				},
 				{
 					type: "dropdown",
 					label: "Layer",
@@ -136,7 +144,8 @@ module.exports = {
 				command = protocol[model].COMMANDS.TRANS_CUT;
 				break;
 			case "xpt_me":
-				command = protocol[model].COMMANDS.XPT_ME1
+				command = protocol[model].COMMANDS.XPT_ME
+					.replace("{me}", options.me)
 					.replace("{layer}", options.layer)
 					.replace("{source}", options.source);
 				break;
