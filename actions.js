@@ -148,29 +148,29 @@ module.exports = {
 
 		switch (action) {
 			case "get_state":
-				command = protocol[model].COMMANDS.GET_STATE;
+				command = protocol[model].COMMANDS.GET_STATE || "";
 				break;
 			case "reboot":
-				command = protocol[model].COMMANDS.REBOOT;
+				command = protocol[model].COMMANDS.REBOOT || "";
 				break;
 			case "recall_event":
 				let eventInt = parseInt(options.event) + 1; // Although the switcher labels them starting at 0, they are recalled with a 1 base...
 				let eventHex = ("0" + eventInt.toString(16)).slice(-2); // The switcher expects the event Id as a 2-digit hexidecimal
-				command = protocol[model].COMMANDS.RECALL_EVENT
+				command = (protocol[model].COMMANDS.RECALL_EVENT || "")
 					.replace( "{event}", eventHex);
 				break;
 			case "trans_me":
-				command = protocol[model].COMMANDS[`TRANS_ME_${options.type}`]
+				command = (protocol[model].COMMANDS[`TRANS_ME_${options.type}`] || "")
 					.replace("{me}", options.me);
 				break;
 			case "xpt_me":
-				command = protocol[model].COMMANDS.XPT_ME
+				command = (protocol[model].COMMANDS.XPT_ME || "")
 					.replace("{me}", options.me)
 					.replace("{layer}", protocol[model].ME_LAYERS[options.layer])
 					.replace("{source}", options.source);
 				break;
 			case "xpt_aux":
-				command = protocol[model].COMMANDS.XPT_AUX
+				command = (protocol[model].COMMANDS.XPT_AUX || "")
 					.replace("{aux}", options.aux)
 					.replace("{source}", options.source);
 				break;

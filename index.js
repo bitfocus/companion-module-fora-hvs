@@ -50,13 +50,19 @@ class instance extends instance_skel {
 				this.reconnect();
 				break;
 			default:
-				this.sendCommand(
-					this.getCommandForAction(
-						this.config.model,
-						action.action,
-						action.options
-					)
+				let command = this.getCommandForAction(
+					this.config.model,
+					action.action,
+					action.options
 				);
+				if (command !== "") {
+					this.sendCommand(command);
+				} else {
+					this.log(
+						"warn",
+						`Unknown command ${action.label} for model ${this.config.model}.`
+					);
+				}
 		}
 	}
 
