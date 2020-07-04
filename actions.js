@@ -86,9 +86,7 @@ module.exports = {
 					id: "source",
 					required: true,
 					default: 1,
-					choices: protocol[model].SOURCES_ME.concat(
-						protocol[model].SOURCES_AUX
-					),
+					choices: protocol[model].SOURCES_AUX,
 				},
 			],
 		};

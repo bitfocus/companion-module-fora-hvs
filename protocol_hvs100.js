@@ -67,12 +67,14 @@ module.exports = {
 			{ id: 42, label: "Sub Effect 1" },
 			{ id: 43, label: "Sub Effect 2" },
 		],
-		SOURCES_AUX: [
-			// Additional AUX-only sources
-			{ id: 46, label: "Program" },
-			{ id: 47, label: "Preview" },
-			{ id: 48, label: "Clean" },
-			{ id: 50, label: "Multi-View" },
-		],
+		get SOURCES_AUX() {
+			return this.SOURCES_ME.concat([
+				// Additional AUX-only sources
+				{ id: 46, label: "Program" },
+				{ id: 47, label: "Preview" },
+				{ id: 48, label: "Clean" },
+				{ id: 50, label: "Multi-View" },
+			]);
+		},
 	},
 };
