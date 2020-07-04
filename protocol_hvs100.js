@@ -6,8 +6,10 @@ module.exports = {
 			REBOOT: "CMD.020503",
 			// event: 2-digit hex for the selected event
 			RECALL_EVENT: "CMD.030502{event}",
-			TRANS_ME_AUTO: "SET.ME_XPT_ME1_BKGD_TRS_AUTO_STAT:1",
-			TRANS_ME_CUT: "SET.ME_XPT_ME1_BKGD_TRS_AUTO_STAT:3",
+			// me: which me to transition
+			TRANS_ME_AUTO: "SET.ME_XPT_ME{me}_BKGD_TRS_AUTO_STAT:1",
+			// me: which me to transition
+			TRANS_ME_CUT: "SET.ME_XPT_ME{me}_BKGD_TRS_AUTO_STAT:3",
 			// me: which me to set
 			// layer: which layer to set
 			// source: id of the selected source

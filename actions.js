@@ -59,6 +59,14 @@ module.exports = {
 						{ id: "CUT", label: "Cut" },
 					],
 				},
+				{
+					type: "dropdown",
+					label: "ME",
+					id: "me",
+					required: true,
+					default: 1,
+					choices: protocol[model].MES,
+				},
 			]
 		};
 		actions["xpt_aux"] = {
@@ -152,7 +160,8 @@ module.exports = {
 					.replace( "{event}", eventHex);
 				break;
 			case "trans_me":
-				command = protocol[model].COMMANDS[`TRANS_ME_${options.type}`];
+				command = protocol[model].COMMANDS[`TRANS_ME_${options.type}`]
+					.replace("{me}", options.me);
 				break;
 			case "xpt_me":
 				command = protocol[model].COMMANDS.XPT_ME
