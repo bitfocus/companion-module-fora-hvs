@@ -4,11 +4,17 @@ module.exports = {
 			GET_INPUTS: "GET.SIGNAL_GROUP2",
 			GET_STATE: "GET.ALLDATA_ME_XPT",
 			REBOOT: "CMD.020503",
-			RECALL_EVENT: "CMD.030502{event}", // event[0-99]: 2-digit hex for the selected event
+			// event: 2-digit hex for the selected event
+			RECALL_EVENT: "CMD.030502{event}",
 			TRANS_ME_AUTO: "SET.ME_XPT_ME1_BKGD_TRS_AUTO_STAT:1",
 			TRANS_ME_CUT: "SET.ME_XPT_ME1_BKGD_TRS_AUTO_STAT:3",
-			XPT_ME: "SET.ME_XPT_ME{me}_BKGD_{layer}:{source}", // layer: [A=PGM,B=PVW] which layer to set; source: id of the selected source
-			XPT_AUX: "SET.ME_XPT_AUX{aux}:{source}", // aux[1-8]: which aux to set; source: id of the selected source
+			// me: which me to set
+			// layer: which layer to set
+			// source: id of the selected source
+			XPT_ME: "SET.ME_XPT_ME{me}_BKGD_{layer}:{source}",
+			// aux: which aux to set;
+			// source: id of the selected source
+			XPT_AUX: "SET.ME_XPT_AUX{aux}:{source}",
 		},
 		AUXES: [
 			{ id: 1, label: "Aux 1" },
