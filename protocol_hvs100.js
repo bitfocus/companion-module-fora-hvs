@@ -18,6 +18,7 @@ module.exports = {
 			// source: id of the selected source
 			XPT_AUX: "SET.ME_XPT_AUX{aux}:{source}",
 		},
+		ME_LAYERS: { A: "A", B: "B" },
 		AUXES: [
 			{ id: 1, label: "Aux 1" },
 			{ id: 2, label: "Aux 2" },

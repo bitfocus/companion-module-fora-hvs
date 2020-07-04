@@ -166,7 +166,7 @@ module.exports = {
 			case "xpt_me":
 				command = protocol[model].COMMANDS.XPT_ME
 					.replace("{me}", options.me)
-					.replace("{layer}", options.layer)
+					.replace("{layer}", protocol[model].ME_LAYERS[options.layer])
 					.replace("{source}", options.source);
 				break;
 			case "xpt_aux":
