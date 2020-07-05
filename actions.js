@@ -125,6 +125,65 @@ module.exports = {
 			],
 		};
 
+		// HVS2000 only actions
+		if (model === "HVS2000") {
+			actions["xpt_mel"] = {
+				label: "Set MELite",
+				options: [
+					{
+						type: "dropdown",
+						label: "MELite",
+						id: "mel",
+						required: true,
+						default: 1,
+						choices: protocol[model].MELS,
+					},
+					{
+						type: "dropdown",
+						label: "Layer",
+						id: "layer",
+						required: true,
+						default: "A",
+						choices: [
+							{ id: "A", label: "A / PGM" },
+							{ id: "B", label: "B / PVW" },
+						],
+					},
+					{
+						type: "dropdown",
+						label: "Source",
+						id: "source",
+						required: true,
+						default: 1,
+						choices: protocol[model].SOURCES_ME,
+					},
+				],
+			};
+			actions["trans_mel"] = {
+				label: "Transition MELite",
+				options: [
+					{
+						type: "dropdown",
+						label: "Type",
+						id: "type",
+						required: true,
+						default: "CUT",
+						choices: [
+							{ id: "AUTO", label: "Auto" },
+							{ id: "CUT", label: "Cut" },
+						],
+					},
+					{
+						type: "dropdown",
+						label: "MELite",
+						id: "mel",
+						required: true,
+						default: 1,
+						choices: protocol[model].MELS,
+					},
+				]
+			};
+		}
 		return actions;
 	},
 
@@ -147,6 +206,7 @@ module.exports = {
 		let command = "";
 
 		switch (action) {
+			// Global actions
 			case "get_state":
 				command = protocol[model].COMMANDS.GET_STATE || "";
 				break;
@@ -174,6 +234,20 @@ module.exports = {
 					.replace("{aux}", options.aux)
 					.replace("{source}", options.source);
 				break;
+
+			// HVS2000 only actions
+			case "trans_mel":
+				command = (protocol[model].COMMANDS[`TRANS_MEL_${options.type}`] || "")
+					.replace("{mel}", options.mel);
+				break;
+			case "xpt_mel":
+				command = (protocol[model].COMMANDS.XPT_MEL || "")
+					.replace("{mel}", options.mel)
+					.replace("{layer}", protocol[model].ME_LAYERS[options.layer])
+					.replace("{source}", options.source);
+				break;
+
+			// Allow for custom commands
 			case "custom":
 				command = options.command.trim();
 				break;

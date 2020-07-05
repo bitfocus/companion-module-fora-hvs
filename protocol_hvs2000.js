@@ -17,6 +17,14 @@ module.exports = {
 			// aux: which aux to set
 			// source: id of the selected source
 			XPT_AUX: "SET.AUX{aux}_XPT:{source}",
+			// mel: which mel to transition
+			TRANS_MEL_AUTO: "SET.MEL{mel}_TRANSITION:AUTO",
+			// mel: which mel to transition
+			TRANS_MEL_CUT: "SET.MEL{mel}_TRANSITION:CUT",
+			// mel: which mel to set
+			// layer: which layer to set
+			// source: id of the selected source
+			XPT_MEL: "SET.MEL{mel}BG_XPT_{layer}:{source}",
 		},
 		ME_LAYERS: { A: "PGM", B: "PST" },
 		AUXES: [
