@@ -5,7 +5,7 @@ module.exports = {
 	 * - Changed "set_me1" action to allow selecting the ME
 	 * - Added a model selector option to module config
 	 */
-	upgradeV1x1x0: (config, actions, releaseActions, feedbacks) => {
+	upgradeV1x1: (config, actions, releaseActions, feedbacks) => {
 		console.log("Running 1.0.x -> 1.1.0 upgrade.");
 		let changed = false;
 
@@ -21,6 +21,31 @@ module.exports = {
 				action.action = "xpt_me";
 				action.label = `${action.instance}:${action.action}`;
 				action.options.me = 1;
+				changed = true;
+			}
+		}
+
+		return changed;
+	},
+
+	/**
+	 * Upgrade 1.1.x -> 1.2.0
+	 * CHANGES:
+	 * - Combined seperate ME transition actions into 1
+	 * - Updated ME transition actions to allow selecting the ME
+	 */
+	upgradeV1x2: (config, actions, releaseActions, feedbacks) => {
+		console.log("Running 1.1.x -> 1.2.0 upgrade.");
+		let changed = false;
+
+		for (let action of [...actions, ...releaseActions]) {
+			if (action.action === "trans_auto" || action.action === "trans_cut") {
+				console.log("Updated a transition action to the new format.");
+				let type = action.action === "trans_auto" ? "AUTO" : "CUT";
+				action.action = "trans_me";
+				action.label = `${action.instance}:${action.action}`;
+				action.options.me = 1;
+				action.options.type = type;
 				changed = true;
 			}
 		}

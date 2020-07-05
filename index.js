@@ -21,7 +21,10 @@ class instance extends instance_skel {
 
 		this.RECONNECT_TIMEOUT = 15; // Number of seconds to wait before reconnect
 		this.REBOOT_WAIT_TIME = 120; // Number of seconds to wait until next login after reboot
-		this.MODELS = [{ id: "HVS100", label: "HVS 100/110" }];
+		this.MODELS = [
+			{ id: "HVS100", label: "HVS 100/110" },
+			{ id: "HVS2000", label: "HVS 2000" },
+		];
 
 		this.reconnecting = null;
 
@@ -30,7 +33,8 @@ class instance extends instance_skel {
 		});
 
 		// Upgrade scripts
-		this.addUpgradeScript(upgrades.upgradeV1x1x0);
+		this.addUpgradeScript(upgrades.upgradeV1x1);
+		this.addUpgradeScript(upgrades.upgradeV1x2);
 	}
 
 	/**
@@ -49,13 +53,19 @@ class instance extends instance_skel {
 				this.reconnect();
 				break;
 			default:
-				this.sendCommand(
-					this.getCommandForAction(
-						this.config.model,
-						action.action,
-						action.options
-					)
+				let command = this.getCommandForAction(
+					this.config.model,
+					action.action,
+					action.options
 				);
+				if (command !== "") {
+					this.sendCommand(command);
+				} else {
+					this.log(
+						"warn",
+						`Unknown command ${action.label} for model ${this.config.model}.`
+					);
+				}
 		}
 	}
 
