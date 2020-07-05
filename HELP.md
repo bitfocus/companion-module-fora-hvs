@@ -17,6 +17,7 @@ This module has been tested on the following switcher models. If you would like 
   - Change ME sources
   - Change AUX sources
   - Cut & Auto transitions (ME and MELite)
+  - Cut & Auto transitions (KEY, DSK, and FlexKey)
   - Reboot the switcher
   - Send the switcher a custom command (**Note**: If you send something the switcher doesnt understand, it may drop the connection.)
 - HVS 100/110 Only
@@ -27,7 +28,6 @@ This module has been tested on the following switcher models. If you would like 
 ## Planned / Coming Soon
 
 - Pull source names from the switcher
-- Transition keys in/out
 - Recall/playback macros by id #
 - Better disconnect detection
 - **Feedbacks**

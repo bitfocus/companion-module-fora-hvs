@@ -10,6 +10,12 @@ module.exports = {
 			TRANS_ME_AUTO: "SET.ME_XPT_ME{me}_BKGD_TRS_AUTO_STAT:1",
 			// me: which me to transition
 			TRANS_ME_CUT: "SET.ME_XPT_ME{me}_BKGD_TRS_AUTO_STAT:3",
+			// me: which me owns the key
+			// key: which key to transition
+			TRANS_KEY_AUTO: "SET.ME_XPT_ME{me}_KEY{key}_TRS_AUTO_STAT:1",
+			// me: which me owns the key
+			// key: which key to transition
+			TRANS_KEY_CUT: "SET.ME_XPT_ME{me}_KEY{key}_TRS_AUTO_STAT:3",
 			// me: which me to set
 			// layer: which layer to set
 			// source: id of the selected source
@@ -31,6 +37,12 @@ module.exports = {
 		],
 		MES: [
 			{ id: 1, label: "ME 1" },
+		],
+		KEYS: [
+			{ id: "1,1", label: "KEY 1" },
+			{ id: "1,2", label: "KEY 2" },
+			{ id: "1,3", label: "DSK 1" },
+			{ id: "1,4", label: "DSK 2" },
 		],
 		get SOURCES_ME() {
 			let sources = [

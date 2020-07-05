@@ -10,6 +10,16 @@ module.exports = {
 			TRANS_ME_AUTO: "SET.M{me}BG_TRANSITION:AUTO",
 			// me: which me to transition
 			TRANS_ME_CUT: "SET.M{me}BG_TRANSITION:CUT",
+			// me: which me owns the key
+			// key: which key to transition
+			TRANS_KEY_AUTO: "SET.M{me}K{key}_TRANSITION:AUTO",
+			// me: which me owns the key
+			// key: which key to transition
+			TRANS_KEY_CUT: "SET.M{me}K{key}_TRANSITION:CUT",
+			// key: which flex key to transition
+			TRANS_FLEX_KEY_AUTO: "SET.FLX{key}_TRANSITION:AUTO",
+			// key: which flex key to transition
+			TRANS_FLEX_KEY_CUT: "SET.FLX{key}_TRANSITION:CUT",
 			// me: which me to set
 			// layer: which layer to set
 			// source: id of the selected source
@@ -59,6 +69,26 @@ module.exports = {
 			{ id: 4, label: "MELite 4" },
 			{ id: 5, label: "MELite 5" },
 			{ id: 6, label: "MELite 6" },
+		],
+		KEYS: [
+			{ id: "1,1", label: "ME1 Key1" },
+			{ id: "1,2", label: "ME1 Key2" },
+			{ id: "1,3", label: "ME1 Key3" },
+			{ id: "1,4", label: "ME1 Key4" },
+			{ id: "2,1", label: "ME2 Key1" },
+			{ id: "2,2", label: "ME2 Key2" },
+			{ id: "2,3", label: "ME2 Key3" },
+			{ id: "2,4", label: "ME2 Key4" },
+			{ id: "3,1", label: "ME3 Key1" },
+			{ id: "3,2", label: "ME3 Key2" },
+			{ id: "3,3", label: "ME3 Key3" },
+			{ id: "3,4", label: "ME3 Key4" },
+		],
+		FLEX_KEYS: [
+			{ id: 1, label: "Flex Key1" },
+			{ id: 2, label: "Flex Key2" },
+			{ id: 3, label: "Flex Key3" },
+			{ id: 4, label: "Flex Key4" },
 		],
 		get SOURCES_ME() {
 			let sources = [

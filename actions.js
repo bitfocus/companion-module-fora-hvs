@@ -71,6 +71,30 @@ module.exports = {
 				},
 			]
 		};
+		actions["trans_key"] = {
+			label: "Transition Key",
+			options: [
+				{
+					type: "dropdown",
+					label: "Type",
+					id: "type",
+					required: true,
+					default: "CUT",
+					choices: [
+						{ id: "AUTO", label: "Auto" },
+						{ id: "CUT", label: "Cut" },
+					],
+				},
+				{
+					type: "dropdown",
+					label: "Key",
+					id: "key",
+					required: true,
+					default: "1,1",
+					choices: protocol[model].KEYS,
+				},
+			]
+		};
 		actions["xpt_aux"] = {
 			label: "Set AUX",
 			options: [
@@ -183,6 +207,30 @@ module.exports = {
 					},
 				]
 			};
+			actions["trans_flex_key"] = {
+				label: "Transition Flex Key",
+				options: [
+					{
+						type: "dropdown",
+						label: "Type",
+						id: "type",
+						required: true,
+						default: "CUT",
+						choices: [
+							{ id: "AUTO", label: "Auto" },
+							{ id: "CUT", label: "Cut" },
+						],
+					},
+					{
+						type: "dropdown",
+						label: "Key",
+						id: "key",
+						required: true,
+						default: 1,
+						choices: protocol[model].FLEX_KEYS,
+					},
+				]
+			};
 		}
 		return actions;
 	},
@@ -223,6 +271,12 @@ module.exports = {
 				command = (protocol[model].COMMANDS[`TRANS_ME_${options.type}`] || "")
 					.replace("{me}", options.me);
 				break;
+			case "trans_key":
+				let key = options.key.split(",");
+				command = (protocol[model].COMMANDS[`TRANS_KEY_${options.type}`] || "")
+					.replace("{me}", key[0])
+					.replace("{key}", key[1]);
+				break;
 			case "xpt_me":
 				command = (protocol[model].COMMANDS.XPT_ME || "")
 					.replace("{me}", options.me)
@@ -245,6 +299,10 @@ module.exports = {
 					.replace("{mel}", options.mel)
 					.replace("{layer}", protocol[model].ME_LAYERS[options.layer])
 					.replace("{source}", options.source);
+				break;
+			case "trans_flex_key":
+				command = (protocol[model].COMMANDS[`TRANS_FLEX_KEY_${options.type}`] || "")
+					.replace("{key}", options.key);
 				break;
 
 			// Allow for custom commands
