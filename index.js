@@ -63,7 +63,7 @@ class instance extends instance_skel {
 				} else {
 					this.log(
 						"warn",
-						`Unknown command ${action.label} for model ${this.config.model}.`
+						`Unknown command "${action.action}" for model ${this.config.model}.`
 					);
 				}
 		}
@@ -109,7 +109,6 @@ class instance extends instance_skel {
 			this.debug("IP or Model changed. Reinitalizing module.");
 			this.setActions(this.getActions(this.config.model));
 
-			this.status(this.STATUS_UNKNOWN);
 			this.connect();
 		}
 	}
@@ -125,7 +124,6 @@ class instance extends instance_skel {
 
 		this.setActions(this.getActions(this.config.model));
 
-		this.status(this.STATUS_UNKNOWN);
 		this.connect();
 	}
 
@@ -133,6 +131,7 @@ class instance extends instance_skel {
 	 * Initialize the websocket connection to the server
 	 */
 	connect() {
+		this.status(this.STATUS_UNKNOWN);
 		this.log("info", "Attempting to connect to switcher");
 		if (this.reconnecting) {
 			// existing reconnect attempt
@@ -167,10 +166,14 @@ class instance extends instance_skel {
 					})
 					.on("error", (error) => {
 						this.debug(`Socket error: ${error}`);
+						this.log("warn", "Switcher communication error");
+						this.status(this.STATUS_ERROR);
+						this.reconnect.bind(this, true);
 					})
 					.on("close", (reasonCode, description) => {
 						this.debug(`Socket closed: [${reasonCode}]-${description}`);
-						this.log("info", "Disconnected from switcher");
+						this.log("warn", "Disconnected from switcher");
+						this.status(this.STATUS_ERROR);
 						this.reconnect.bind(this, true);
 					});
 				// Get the initial state data
@@ -180,7 +183,7 @@ class instance extends instance_skel {
 			})
 			.on("connectFailed", (errorDescription) => {
 				this.debug(`Websocket connection failed: ${errorDescription}`);
-				this.log("warning", "Connection to switcher failed");
+				this.log("warn", "Connection to switcher failed");
 				this.status(this.STATUS_ERROR);
 			});
 
@@ -197,7 +200,6 @@ class instance extends instance_skel {
 	 */
 	reconnect(retry_immediately = false) {
 		this.log("info", "Attempting to reconnect to switcher");
-		this.status(this.STATUS_ERROR);
 		this.disconnect();
 
 		if (retry_immediately) {
@@ -228,7 +230,7 @@ class instance extends instance_skel {
 	 */
 	sendCommand(command) {
 		if (!this.socket || !this.socket.connected) {
-			this.log("warning", "Switcher not connected");
+			this.log("warn", "Switcher not connected");
 			this.reconnect.bind(this, true);
 			return;
 		}
@@ -241,7 +243,7 @@ class instance extends instance_skel {
 	 */
 	disconnect() {
 		this.log("info", "Disconnecting from switcher");
-		this.status(this.STATUS_ERROR);
+		this.status(this.STATUS_UNKNOWN);
 		if (this.socket && this.socket.connected) {
 			this.socket.close();
 		}
