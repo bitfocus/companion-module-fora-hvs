@@ -158,6 +158,26 @@ module.exports = {
 				{ id: 64, label: "Matte 2" },
 				{ id: 65, label: "Grand Matte" },
 
+				{ id: 72, label: "ME1" },
+				{ id: 73, label: "ME1 Out 1" },
+				{ id: 74, label: "ME1 Out 2" },
+				{ id: 75, label: "ME2" },
+				{ id: 76, label: "ME2 Out 1" },
+				{ id: 77, label: "ME2 Out 2" },
+
+				{ id: 80, label: "MV1 Out A" },
+				{ id: 81, label: "MV2 Out A" },
+
+				{ id: 84, label: "ME3" },
+				{ id: 85, label: "ME3 Out 1" },
+				{ id: 86, label: "ME3 Out 2" },
+
+				{ id: 95, label: "MV3 Out A" },
+				{ id: 96, label: "MV4 Out A" },
+
+				{ id: 105, label: "ME1 Out 3" },
+				{ id: 106, label: "ME2 Out 3" },
+				{ id: 107, label: "ME3 Out 3" },
 				{ id: 108, label: "Chroma Key 1 Fill" },
 				{ id: 109, label: "Chroma Key 1 Key" },
 				{ id: 110, label: "Chroma Key 2 Fill" },
@@ -188,48 +208,53 @@ module.exports = {
 				{ id: 136, label: "Color Correct 7" },
 				{ id: 137, label: "Color Correct 8" },
 
+				{ id: 139, label: "Aux 1" },
+				{ id: 140, label: "Aux 2" },
+				{ id: 141, label: "Aux 3" },
+				{ id: 142, label: "Aux 4" },
+				{ id: 143, label: "Aux 5" },
+				{ id: 144, label: "Aux 6" },
+				{ id: 145, label: "Aux 7" },
+				{ id: 146, label: "Aux 8" },
+				{ id: 147, label: "Aux 9" },
+				{ id: 148, label: "Aux 10" },
+				{ id: 149, label: "Aux 11" },
+				{ id: 150, label: "Aux 12" },
+				{ id: 151, label: "Aux 13" },
+				{ id: 152, label: "Aux 14" },
+				{ id: 153, label: "Aux 15" },
+				{ id: 154, label: "Aux 16" },
+				{ id: 155, label: "Aux 17" },
+				{ id: 156, label: "Aux 18" },
+				{ id: 157, label: "MELite 1 PGM" },
+				{ id: 158, label: "MELite 2 PGM" },
+				{ id: 159, label: "MELite 3 PGM" },
+				{ id: 160, label: "MELite 4 PGM" },
+				{ id: 161, label: "MELite 5 PGM" },
+				{ id: 162, label: "MELite 6 PGM" },
+				{ id: 163, label: "MELite 1 PVW" },
+				{ id: 164, label: "MELite 2 PVW" },
+				{ id: 165, label: "MELite 3 PVW" },
+				{ id: 166, label: "MELite 4 PVW" },
+				{ id: 167, label: "MELite 5 PVW" },
+				{ id: 168, label: "MELite 6 PVW" },
 				{ id: 169, label: "Still 1 Key" },
 				{ id: 170, label: "Still 2 Key" },
 				{ id: 171, label: "Still 3 Key" },
 				{ id: 172, label: "Still 4 Key" },
 				{ id: 173, label: "Still 5 Key" },
 				{ id: 174, label: "Still 6 Key" },
+				{ id: 175, label: "MV1 Out B" },
+				{ id: 176, label: "MV2 Out B" },
+				{ id: 177, label: "MV3 Out B" },
+				{ id: 178, label: "MV4 Out B" },
 			];
 			return sources.concat(
 				system.sort((a, b) => (a.label > b.label ? 1 : -1))
 			);
 		},
 		get SOURCES_AUX() {
-			let additional = [
-				{ id: 72, label: "ME1" },
-				{ id: 73, label: "ME1 Out 1" },
-				{ id: 74, label: "ME1 Out 2" },
-				{ id: 75, label: "ME2" },
-				{ id: 76, label: "ME2 Out 1" },
-				{ id: 77, label: "ME2 Out 2" },
-
-				{ id: 80, label: "MV1 Out A" },
-				{ id: 81, label: "MV2 Out A" },
-
-				{ id: 84, label: "ME3" },
-				{ id: 85, label: "ME3 Out 1" },
-				{ id: 86, label: "ME3 Out 2" },
-
-				{ id: 95, label: "MV3 Out A" },
-				{ id: 96, label: "MV4 Out A" },
-
-				{ id: 105, label: "ME1 Out 3" },
-				{ id: 106, label: "ME2 Out 3" },
-				{ id: 107, label: "ME3 Out 3" },
-
-				{ id: 175, label: "MV1 Out B" },
-				{ id: 176, label: "MV2 Out B" },
-				{ id: 177, label: "MV3 Out B" },
-				{ id: 178, label: "MV4 Out B" },
-			];
-			return this.SOURCES_ME.concat(
-				additional.sort((a, b) => (a.label > b.label ? 1 : -1))
-			);
+			return this.SOURCES_ME; // HVS2000 Has no Aux-only sources
 		},
 	},
 };
