@@ -3,7 +3,7 @@ module.exports = {
 		COMMANDS: {
 			GET_INPUTS: "GET.SIGNALS_INFO",
 			GET_STATE: "GET.PNL_ALLDATA",
-			REBOOT: "CMD.020103",
+			//REBOOT: "CMD.020103", // Not supported on HVS2000
 			// event: 2-digit hex for the selected event
 			//RECALL_EVENT: "CMD.030502{event}",
 			// me: which me to transition
