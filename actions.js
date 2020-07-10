@@ -113,6 +113,7 @@ module.exports = {
 					required: true,
 					default: 1,
 					choices: protocol[model].SOURCES_AUX,
+					minChoicesForSearch: 1
 				},
 			],
 		};
@@ -145,6 +146,7 @@ module.exports = {
 					required: true,
 					default: 1,
 					choices: protocol[model].SOURCES_ME,
+					minChoicesForSearch: 1
 				},
 			],
 		};
@@ -180,6 +182,7 @@ module.exports = {
 						required: true,
 						default: 1,
 						choices: protocol[model].SOURCES_ME,
+						minChoicesForSearch: 1
 					},
 				],
 			};
