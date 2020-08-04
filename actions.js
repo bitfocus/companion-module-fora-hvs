@@ -246,6 +246,25 @@ module.exports = {
 		// TODO: Process this data to populate feedbacks
 	},
 
+	parseVariable: (data) => {
+		let [key, value] = data.split(':');
+		let aux;
+		if (key === 'EVT_SETUP_LAST_RCL_NO') {
+			key = 'event_recall';
+		} else if ((aux = key.match('^M([1-9])K([1-9])_KEYONAIR$')) !== null) {
+			key = `me_${aux[1]}_key_${aux[2]}`;
+			value = value === '0' ? 'off' : 'on';
+		} else {
+			return null;
+		}
+
+		return [key, value];
+	},
+
+	getVariableList: (model) => {
+		return protocol[model].VARIABLES;
+	},
+
 	/**
 	 * Return the command string fot the provided action
 	 * @param {string} model - The model of switcher to get the command for

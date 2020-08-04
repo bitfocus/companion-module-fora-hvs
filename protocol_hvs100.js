@@ -35,6 +35,13 @@ module.exports = {
 			{ id: 7, label: "Aux 7" },
 			{ id: 8, label: "Aux 8" },
 		],
+		VARIABLES: [
+			{ label: 'Last event to be recalled', name: 'event_recall' },
+			{ label: 'KEY 1 on/off', name: 'me_1_key_1' },
+			{ label: 'KEY 2 on/off', name: 'me_1_key_2' },
+			{ label: 'DSK 1 on/off', name: 'me_1_key_3' },
+			{ label: 'DSK 2 on/off', name: 'me_1_key_4' }
+		],
 		MES: [
 			{ id: 1, label: "ME 1" },
 		],
