@@ -20,6 +20,7 @@ This module has been tested on the following switcher models. If you would like 
   - Cut & Auto transitions (KEY, DSK, and FlexKey)
   - Reboot the switcher
   - Send the switcher a custom command (**Note**: If you send something the switcher doesnt understand, it may drop the connection.)
+  - Variables for _Key On Air_ and _Last Recalled Event_
 - HVS 100/110 Only
   - Recall events by id #
 - HVS2000 Only
