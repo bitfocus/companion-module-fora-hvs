@@ -56,12 +56,12 @@ module.exports = {
 			{ id: 16, label: "Aux 16" },
 			{ id: 17, label: "Aux 17" },
 			{ id: 18, label: "Aux 18" },
-		],VARIABLES: [
+		],
+		VARIABLES: [
 			{ label: 'Last global event to be recalled', name: 'global_event_recall' },
 			{ label: 'Last ME1 event to be recalled', name: 'me_1_event_recall' },
 			{ label: 'Last ME2 event to be recalled', name: 'me_2_event_recall' },
 			{ label: 'Last ME3 event to be recalled', name: 'me_3_event_recall' },
-			{ label: 'Last ME4 event to be recalled', name: 'me_4_event_recall' },
 			{ label: 'ME1 KEY 1 on/off', name: 'me_1_key_1' },
 			{ label: 'ME1 KEY 2 on/off', name: 'me_1_key_2' },
 			{ label: 'ME1 KEY 3 on/off', name: 'me_1_key_3' },
