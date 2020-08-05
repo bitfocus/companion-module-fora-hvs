@@ -249,12 +249,29 @@ module.exports = {
 	parseVariable: (data) => {
 		let [key, value] = data.split(':');
 		let aux;
+		// HVS100 Events
 		if (key === 'EVT_SETUP_LAST_RCL_NO') {
 			key = 'event_recall';
-		} else if ((aux = key.match('^M([1-9])K([1-9])_KEYONAIR$')) !== null) {
+		}
+		// HVS2000 Global Events
+		else if (key === 'EVENT_LASTRECALL_NO') {
+			key = 'global_event_recall'
+		}
+		// HVS2000 Local Events
+		else if ((aux = key.match('^ME([1-3])_EVENT_LASTRECALL_NO$')) !== null) {
+			key = `me_${aux[1]}_event_recall`;
+		}
+		// HVS100 & HVS2000 ME Keys
+		else if ((aux = key.match('^M([1-3])K([1-4])_KEYONAIR$')) !== null) {
 			key = `me_${aux[1]}_key_${aux[2]}`;
 			value = value === '0' ? 'off' : 'on';
-		} else {
+		}
+		// HVS2000 Flex Keys
+		else if ((aux = key.match('^FLX([1-4])_KEYONAIR$')) !== null) {
+			key = `flex_key_${aux[1]}`;
+			value = value === '0' ? 'off' : 'on';
+		}
+		else {
 			return null;
 		}
 
