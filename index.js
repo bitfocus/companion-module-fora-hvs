@@ -127,6 +127,10 @@ class instance extends instance_skel {
 		this.connect();
 	}
 
+	initVariables() {
+		this.setVariableDefinitions(this.getVariableList(this.config.model));
+	}
+
 	/**
 	 * Initialize the websocket connection to the server
 	 */
@@ -142,6 +146,8 @@ class instance extends instance_skel {
 			// already connected
 			this.disconnect();
 		}
+
+		this.initVariables();
 
 		this.socketClient = new WebSocket();
 
@@ -160,7 +166,14 @@ class instance extends instance_skel {
 								.map((item) => item.trim())
 								.forEach((item) => {
 									this.debug(`Data recieved: "${item}"`);
-									this.dataRecieved(item);
+									if (item.match('^[A-Za-z0-9_:]*$') !== null) {
+										let result = this.parseVariable(item);
+										if (result !== null) {
+											this.setVariable(result[0], result[1]);
+										}
+									} else {
+										this.dataRecieved(item);
+									}
 								});
 						}
 					})
