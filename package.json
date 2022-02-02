@@ -13,5 +13,14 @@
 	],
 	"manufacturer": "For.A",
 	"product": "Hanabi Video Switchers",
-	"shortname": "fora-hvs"
+	"shortname": "fora-hvs",
+	"homepage": "https://github.com/bitfocus/companion-module-fora-hvs#readme",
+	"bugs": {
+		"url": "https://github.com/bitfocus/companion-module-fora-hvs/issues"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/bitfocus/companion-module-fora-hvs.git"
+	},
+	"api_version": "1.0.0"
 }
