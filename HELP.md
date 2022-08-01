@@ -18,6 +18,7 @@ This module has been tested on the following switcher models. If you would like 
   - Change AUX sources
   - Cut & Auto transitions (ME and MELite)
   - Cut & Auto transitions (KEY, DSK, and FlexKey)
+  - Recall/playback macros by id #
   - Reboot the switcher
   - Send the switcher a custom command (**Note**: If you send something the switcher doesnt understand, it may drop the connection.)
   - Variables for _Key On Air_ and _Last Recalled Event_
@@ -29,7 +30,6 @@ This module has been tested on the following switcher models. If you would like 
 ## Planned / Coming Soon
 
 - Pull source names from the switcher
-- Recall/playback macros by id #
 - Better disconnect detection
 - **Feedbacks**
   - Tally (PVW / PGM / Clear)
