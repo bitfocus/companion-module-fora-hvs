@@ -42,6 +42,20 @@ module.exports = {
 				},
 			],
 		}
+		actions['recall_macro'] = {
+			label: 'Recall Macro',
+			options: [
+				{
+					type: 'number',
+					label: 'Macro Number',
+					id: 'macro',
+					default: 0,
+					min: 0,
+					max: 99,
+					required: true,
+				},
+			],
+		}
 		actions['reconnect'] = {
 			label: 'Reconnect',
 			tooltip: 'If the switcher drops the connection, this action will reconnect.',
@@ -310,6 +324,13 @@ module.exports = {
 				let eventInt = parseInt(options.event) + 1 // Although the switcher labels them starting at 0, they are recalled with a 1 base...
 				let eventHex = ('0' + eventInt.toString(16)).slice(-2) // The switcher expects the event Id as a 2-digit hexidecimal
 				command = (protocol[model].COMMANDS.RECALL_EVENT || '').replace('{event}', eventHex)
+				break
+			case 'recall_macro':
+				let macroInt = parseInt(options.macro)
+				let macroHex = ('0' + macroInt.toString(16)).slice(-2) // Some switchers expects the macro Id as a 2-digit hexidecimal
+				command = (protocol[model].COMMANDS.RECALL_MACRO || '')
+					.replace('{macroInt}', macroInt)
+					.replace('{macroHex}', macroHex)
 				break
 			case 'trans_me':
 				command = (protocol[model].COMMANDS[`TRANS_ME_${options.type}`] || '').replace('{me}', options.me)

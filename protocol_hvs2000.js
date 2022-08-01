@@ -6,6 +6,8 @@ module.exports = {
 			//REBOOT: "CMD.020103", // Not supported on HVS2000
 			// event: 2-digit hex for the selected event
 			//RECALL_EVENT: "CMD.030502{event}",
+			// macroInt: which macro to recall
+			RECALL_MACRO: 'SET.MACRO_PLAY:{macroInt}=0',
 			// me: which me to transition
 			TRANS_ME_AUTO: 'SET.M{me}BG_TRANSITION:AUTO',
 			// me: which me to transition
