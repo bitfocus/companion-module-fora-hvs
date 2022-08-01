@@ -33,6 +33,10 @@ class instance extends instance_skel {
 		})
 	}
 
+	/**
+	 * Get any upgrade scripts
+	 * @returns An array of functions representing the upgrade sripts
+	 */
 	static GetUpgradeScripts() {
 		return upgradeScripts
 	}
@@ -116,6 +120,9 @@ class instance extends instance_skel {
 		this.connect()
 	}
 
+	/**
+	 * Initalize the variables
+	 */
 	initVariables() {
 		this.setVariableDefinitions(this.getVariableList(this.config.model))
 	}

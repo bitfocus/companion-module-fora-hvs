@@ -245,6 +245,10 @@ module.exports = {
 		// TODO: Process this data to populate feedbacks
 	},
 
+	/**
+	 * Process data recieved from the switcher to update variables
+	 * @param {string} data - The data that was recieved
+	 */
 	parseVariable: (data) => {
 		let [key, value] = data.split(':')
 		let aux
@@ -276,6 +280,10 @@ module.exports = {
 		return [key, value]
 	},
 
+	/**
+	 * Get the list of possible variables
+	 * @param {string} model - The model we are requesting variables for
+	 */
 	getVariableList: (model) => {
 		return protocol[model].VARIABLES
 	},
