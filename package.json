@@ -1,6 +1,6 @@
 {
 	"name": "fora-hvs",
-	"version": "1.2.6",
+	"version": "1.2.7",
 	"description": "For.A Hanabi Video Switcher module for Companion.",
 	"main": "index.js",
 	"scripts": {
