@@ -10,6 +10,7 @@ This module has been tested on the following switcher models. If you would like 
 
 - HVS 100/110
 - HVS 2000
+- HVS 390 (ME1 and ME2)
 
 ## Current Features
 
