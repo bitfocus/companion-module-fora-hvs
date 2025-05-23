@@ -191,12 +191,12 @@ class instance extends InstanceBase {
 		//if (this.config.debug_messages) {
 		//}
 		const message = msg.toString('utf8');
-		//this.log('info', "Received: " + message)
+		this.log('info', "Received: " + message)
 		message
 			.split(',')
 			.map((item) => item.trim())
 			.forEach((item) => {
-				this.log('warn','Data recieved: ' + item)
+				//this.log('warn','Data recieved: ' + item)
 				if (item.match('^[A-Za-z0-9_:]*$') !== null) {
 					let result = this.parseVariable(item)
 					if (result !== null) {

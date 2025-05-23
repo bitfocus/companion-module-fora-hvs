@@ -425,11 +425,29 @@ module.exports = {
 			key = `me_${aux[1]}_key_${aux[2]}`
 			value = value === '0' ? 'off' : 'on'
 		}
-		// HVS100, HVS390 & HVS2000 ME Keys (Startup check)
+		// HVS100, HVS390 & HVS2000 ME Keys
 		// TODO: Determine difference between M1K1_KEYONAIR and ME_XPT_ME1_KEY1_XPT_PGM_OUT
 		else if ((aux = key.match('^ME_XPT_ME([1-3])_KEY([1-4])_XPT_PGM_OUT$')) !== null) {
 			key = `me_${aux[1]}_key_${aux[2]}`
 			value = value === '0' ? 'off' : 'on'
+		}
+		// HVS100, HVS390 & HVS2000 DVE ME_XPT_ME1_KEY2_DVE_LAMP (Startup Check)
+		else if ((aux = key.match('^ME_XPT_ME([1-3])_KEY([1-4])_DVE_LAMP$')) !== null) {
+			key = `me_${aux[1]}_key_${aux[2]}_dve`
+			value = value === '0' ? 'off' : 'on'
+		}
+		// HVS100, HVS390 & HVS2000 DVE
+		else if ((aux = key.match('^M([1-3])K([1-4])_POS_SIZE_2DDVE$')) !== null) {
+			key = `me_${aux[1]}_key_${aux[2]}_dve`
+			value = value === 'OFF' ? 'off' : 'on'
+		}
+		// HVS100, HVS390 PGM selection
+		else if ((aux = key.match('^ME_XPT_ME([1-3])_BKGD_A$')) !== null) {
+			key = `me_${aux[1]}_pgm_a`
+		}
+		// HVS100, HVS390 PRV selection
+		else if ((aux = key.match('^ME_XPT_ME([1-3])_BKGD_B$')) !== null) {
+			key = `me_${aux[1]}_prv_b`
 		}
 		// HVS2000 Flex Keys
 		else if ((aux = key.match('^FLX([1-4])_KEYONAIR$')) !== null) {

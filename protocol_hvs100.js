@@ -38,11 +38,11 @@ module.exports = {
 			{ id: 8, label: 'Aux 8' },
 		],
 		VARIABLES: [
-			{ label: 'Last event to be recalled', name: 'event_recall' },
-			{ label: 'KEY 1 on/off', name: 'me_1_key_1' },
-			{ label: 'KEY 2 on/off', name: 'me_1_key_2' },
-			{ label: 'DSK 1 on/off', name: 'me_1_key_3' },
-			{ label: 'DSK 2 on/off', name: 'me_1_key_4' },
+			{ name: 'Last event to be recalled', variableId: 'event_recall' },
+			{ name: 'KEY 1 on/off', variableId: 'me_1_key_1' },
+			{ name: 'KEY 2 on/off', variableId: 'me_1_key_2' },
+			{ name: 'DSK 1 on/off', variableId: 'me_1_key_3' },
+			{ name: 'DSK 2 on/off', variableId: 'me_1_key_4' },
 		],
 		MES: [{ id: 1, label: 'ME 1' }],
 		KEYS: [
