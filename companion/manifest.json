@@ -10,9 +10,9 @@
 	"keywords": [
 		"Video"
 	],
-	"version": "1.2.7",
+	"version": "0.0.0",
 	"license": "MIT",
-	"repository": "git+https://github.com/bitfocus/companion-module-fora-hvs1.git",
+	"repository": "git+https://github.com/bitfocus/companion-module-fora-hvs.git",
 	"bugs": "https://github.com/bitfocus/companion-module-fora-hvs/issues",
 	"maintainers": [
 		{
@@ -24,11 +24,10 @@
 			"email": "matth@woosternaz.org"
 		}
 	],
-	"legacyIds": ["fora-hvs"],
 	"runtime": {
-		"type": "node18",
+		"type": "node22",
 		"api": "nodejs-ipc",
-		"apiVersion": "1.0.1",
+		"apiVersion": "0.0.0",
 		"entrypoint": "../index.js"
 	}
 }

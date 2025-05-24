@@ -52,7 +52,7 @@ module.exports = {
 				break
 			case 'recall_event':
 				let eventInt = parseInt(options.event) + 1 // Although the switcher labels them starting at 0, they are recalled with a 1 base...
-				let eventHex = ('0' + eventInt.toString(16)).slice(-2) // The switcher expects the event Id as a 2-digit hexidecimal
+				let eventHex = eventInt.toString(16).padStart(2,'0') // The switcher expects the event Id as a 2-digit hexidecimal
 				command = (protocol[model].COMMANDS.RECALL_EVENT || '').replace('{event}', eventHex)
 				break
 			case 'recall_macro':

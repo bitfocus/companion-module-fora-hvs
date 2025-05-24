@@ -5,7 +5,7 @@ module.exports = [
 	 * - Changed "set_me1" action to allow selecting the ME
 	 * - Added a model selector option to module config
 	 */
-	function (context, config, actions, feedbacks) {
+	function (context, config, actions) {
 		console.log('Running 1.0.x -> 1.1.0 upgrade.')
 		let changed = false
 

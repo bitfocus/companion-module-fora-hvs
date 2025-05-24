@@ -1,24 +1,21 @@
 /**
  *
- * Companion instance class for the A&H dLive & iLive Mixers.
- * @version 1.2.7
+ * @version 2.0.0
  *
  */
 const { InstanceBase, InstanceStatus, runEntrypoint, Regex } = require('@companion-module/base')
 let WebSocket = require('ws')
 let actions = require('./actions')
-let feedbacks = require('./feedbacks')
 let upgradeScripts = require('./upgrades')
-//let socket = require('./socket')
 
 /**
  * Companion instance for controling For.A Hanabi Switchers
  *
  * @extends InstanceBase
- * @since 1.2.7
+ * @since 2.0.0
  * @author Michael Allen <michael.allen@barefootchurch.com>
  */
-class instance extends InstanceBase {
+class forAinstance extends InstanceBase {
 	/**
 	 * @param {EventEmitter} system - The brains of the operation
 	 * @param {string} id - The instance ID
@@ -29,7 +26,6 @@ class instance extends InstanceBase {
 		// Assign the methods from the listed files to this class
 		Object.assign(this, {
 				...actions,
-				...feedbacks,
 				...upgradeScripts
 			})
 			
@@ -43,7 +39,6 @@ class instance extends InstanceBase {
 		this.REBOOT_WAIT_TIME = 120 // Number of seconds to wait until next login after reboot
 		this.isInitialized = false
 		this.isConnected = false
-		this.wsRegex = '^wss?:\\/\\/([\\da-z\\.-]+)(:\\d{1,5})?(?:\\/(.*))?$'
 		}
 
 	/**
@@ -68,7 +63,6 @@ class instance extends InstanceBase {
 		this.isInitialized = true
 		this.updateVariables()
 		this.updateActions()
-		this.updateFeedbacks()
 		await this.configUpdated(config)
 	}
 	
@@ -115,7 +109,6 @@ class instance extends InstanceBase {
 	async configUpdated(config) {
 		let oldConfig = this.config
 		this.config = config
-		this.log('info', this.config.host)
 		this.updateActions()
 
 		// If the ip or model changed, reinitalize the module
@@ -129,8 +122,6 @@ class instance extends InstanceBase {
 	 * Initalize the variables
 	 */
 	updateVariables() {
-		this.log('var check')
-		this.log(this.getVariableList(this.config.model))
 		this.setVariableDefinitions(this.getVariableList(this.config.model))
 	}
 
@@ -153,7 +144,7 @@ class instance extends InstanceBase {
 
 		const url = 'ws://' + this.config.host + ':8621'
 		this.log('info', 'Connecting: ' + url)
-		if (!url || url.match(new RegExp(this.wsRegex)) === null) {
+		if (!url || url.match(new RegExp(Regex.IP)) === null) {
 			this.updateStatus(InstanceStatus.BadConfig, `WS URL is not defined or invalid`)
 			return
 		}
@@ -200,8 +191,7 @@ class instance extends InstanceBase {
 				if (item.match('^[A-Za-z0-9_:]*$') !== null) {
 					let result = this.parseVariable(item)
 					if (result !== null) {
-						let jsonStr = '{"' + result[0] + '":"' + result[1] + '"}'
-						this.setVariableValues(JSON.parse(jsonStr))
+						this.setVariableValues({[result[0]]: result[1]})
 					}
 				} else {
 					this.dataRecieved(item)
@@ -211,6 +201,6 @@ class instance extends InstanceBase {
 	}
 }
 
-runEntrypoint(instance, [])
+runEntrypoint(forAinstance, [])
 
-exports = module.exports = instance
+exports = module.exports = forAinstance
