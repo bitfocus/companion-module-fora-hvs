@@ -85,7 +85,7 @@ class forAinstance extends InstanceBase {
 				id: 'host',
 				label: 'Target IP',
 				width: 6,
-				regex: Regex.IP
+				regex: /^(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/
 			},
 		]
 	}
@@ -144,8 +144,8 @@ class forAinstance extends InstanceBase {
 
 		const url = 'ws://' + this.config.host + ':8621'
 		this.log('info', 'Connecting: ' + url)
-		if (!url || url.match(new RegExp(Regex.IP)) === null) {
-			this.updateStatus(InstanceStatus.BadConfig, `WS URL is not defined or invalid`)
+		if (!url || this.config.regex.test(this.config.host) == false) {
+				this.updateStatus(InstanceStatus.BadConfig, `WS URL is not defined or invalid`)
 			return
 		}
 
@@ -157,6 +157,8 @@ class forAinstance extends InstanceBase {
 			this.isConnected = false
 		}
 		this.ws = new WebSocket(url, {'origin': this.config.host})
+
+		this.ws.on('message', this.messageReceivedFromWebSocket.bind(this))
 
 		this.ws.on('open', () => {
 			this.updateStatus(InstanceStatus.Ok)
@@ -170,8 +172,6 @@ class forAinstance extends InstanceBase {
 			this.isConnected = false
 			this.maybeReconnect()
 		})
-
-		this.ws.on('message', this.messageReceivedFromWebSocket.bind(this))
 
 		this.ws.on('error', (data) => {
 			this.log('error', `WebSocket error: ${data.stack}`)

@@ -132,7 +132,7 @@ module.exports = {
 		}
 		actions.reboot = {
 			name: 'Reboot Switcher',
-			options : [{}],
+			options : [],
 			callback: async (event) => {
 				this.sendCommand(this.getCommandForAction(this.config.model, 'reboot', null))
 				this.disconnect()
@@ -176,7 +176,7 @@ module.exports = {
 		actions.reconnect = {
 			name: 'Reconnect',
 			tooltip: 'If the switcher drops the connection, this action will reconnect.',
-			options : [{}],
+			options : [],
 			callback: async (event) => {
 				this.reconnect()
 			},

@@ -35,7 +35,7 @@ module.exports = [
 	 * - Combined seperate ME transition actions into 1
 	 * - Updated ME transition actions to allow selecting the ME
 	 */
-	function (context, config, actions, feedbacks) {
+	function (context, config, actions) {
 		console.log('Running 1.1.x -> 1.2.0 upgrade.')
 		let changed = false
 
