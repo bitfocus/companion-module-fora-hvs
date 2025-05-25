@@ -13,20 +13,30 @@ module.exports = {
 	 * Send a command to the switcher
 	 * @param {string} command - The command to send
 	 */
-	sendCommand(command) {
+	async sendCommand(command) {
 		if (!this.isConnected) {
 			this.log('warn', 'Switcher not connected')
 			this.reconnect.bind(this, true)
 			return
 		}
 		this.log('info', 'Sending command: ' + command)
-		this.ws.send(command)
+		return new Promise((resolve, reject) => {
+			this.ws.send(command, (err) => {
+			  if (err) {
+				this.log('warning', 'Sending command failed: ' + command)
+				reject(err);
+			  } else {
+				this.log('info', 'Sent command successfully: ' + command)
+				resolve();
+			  }
+			});
+		  });
 	},
-	buildCommand(action, options) {
+	async buildCommand(action, options) {
 		//this.log('warn', action)
 		let command = this.getCommandForAction(this.config.model, action, options)
 		if (command !== '') {
-			this.sendCommand(command)
+			await this.sendCommand(command)
 		} else {
 			this.log('warn', `Unknown command "${action.action}" for model ${this.config.model}.`)
 		}

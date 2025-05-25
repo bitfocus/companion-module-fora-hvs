@@ -85,7 +85,7 @@ class forAinstance extends InstanceBase {
 				id: 'host',
 				label: 'Target IP',
 				width: 6,
-				regex: /^(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/
+				regex: Regex.IP
 			},
 		]
 	}
@@ -144,8 +144,9 @@ class forAinstance extends InstanceBase {
 
 		const url = 'ws://' + this.config.host + ':8621'
 		this.log('info', 'Connecting: ' + url)
-		if (!url || this.config.regex.test(this.config.host) == false) {
-				this.updateStatus(InstanceStatus.BadConfig, `WS URL is not defined or invalid`)
+		let regexIP = /^(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/
+		if (!url || regexIP.test(this.config.host) == false) {
+			this.updateStatus(InstanceStatus.BadConfig, `WS URL is not defined or invalid`)
 			return
 		}
 
