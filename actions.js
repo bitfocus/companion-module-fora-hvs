@@ -137,7 +137,7 @@ module.exports = {
 				},
 			],
 			callback: async (event) => {
-				this.buildCommand('custom', event.options)
+				await this.buildCommand('custom', event.options)
 			},
 		}
 		actions.reboot = {
@@ -163,7 +163,7 @@ module.exports = {
 				},
 			],
 			callback: async (event) => {
-				this.buildCommand('recall_event', event.options)
+				await this.buildCommand('recall_event', event.options)
 			},
 		}
 		actions.recall_macro = {
@@ -180,7 +180,7 @@ module.exports = {
 				},
 			],
 			callback: async (event) => {
-				this.buildCommand('recall_macro', event.options)
+				await this.buildCommand('recall_macro', event.options)
 			},
 		}
 		actions.reconnect = {
@@ -215,7 +215,7 @@ module.exports = {
 				},
 			],
 			callback: async (event) => {
-				this.buildCommand('trans_me', event.options)
+				await this.buildCommand('trans_me', event.options)
 			},
 		}
 		actions.trans_key = {
@@ -242,7 +242,7 @@ module.exports = {
 				},
 			],
 			callback: async (event) => {
-				this.buildCommand('trans_key', event.options)
+				await this.buildCommand('trans_key', event.options)
 			},
 		}
 		actions.xpt_aux = {
@@ -267,7 +267,7 @@ module.exports = {
 				},
 			],
 			callback: async (event) => {
-				this.buildCommand('xpt_aux', event.options)
+				await this.buildCommand('xpt_aux', event.options)
 			},
 		}
 		actions.xpt_me = {
@@ -303,7 +303,7 @@ module.exports = {
 				},
 			],
 			callback: async (event) => {
-				this.buildCommand('xpt_me', event.options)
+				await this.buildCommand('xpt_me', event.options)
 			},
 		}
 
@@ -342,7 +342,7 @@ module.exports = {
 					},
 				],
 				callback: async (event) => {
-					this.buildCommand('xpt_mel', event.options)
+					await this.buildCommand('xpt_mel', event.options)
 				},
 			}
 			actions.trans_mel = {
@@ -369,7 +369,7 @@ module.exports = {
 					},
 				],
 				callback: async (event) => {
-					this.buildCommand('trans_mel', event.options)
+					await this.buildCommand('trans_mel', event.options)
 				},
 			}
 			actions.trans_flex_key = {
@@ -396,7 +396,7 @@ module.exports = {
 					},
 				],
 				callback: async (event) => {
-					this.buildCommand('trans_flex_key', event.options)
+					await this.buildCommand('trans_flex_key', event.options)
 				},
 			}
 		}
