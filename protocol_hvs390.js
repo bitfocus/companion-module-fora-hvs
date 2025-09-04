@@ -1,5 +1,5 @@
 module.exports = {
-	HVS100: {
+	HVS390: {
 		COMMANDS: {
 			GET_INPUTS: 'GET.SIGNAL_GROUP2',
 			GET_STATE: 'GET.ALLDATA_ME_XPT',
@@ -39,17 +39,41 @@ module.exports = {
 		],
 		VARIABLES: [
 			{ name: 'Last event to be recalled', variableId: 'event_recall' },
-			{ name: 'KEY 1 on/off', variableId: 'me_1_key_1' },
-			{ name: 'KEY 2 on/off', variableId: 'me_1_key_2' },
-			{ name: 'DSK 1 on/off', variableId: 'me_1_key_3' },
-			{ name: 'DSK 2 on/off', variableId: 'me_1_key_4' },
+			{ name: 'ME1 KEY 1 on/off', variableId: 'me_1_key_1' },
+			{ name: 'ME1 KEY 2 on/off', variableId: 'me_1_key_2' },
+			{ name: 'ME1 KEY 3 on/off', variableId: 'me_1_key_3' },
+			{ name: 'ME1 KEY 4 on/off', variableId: 'me_1_key_4' },
+			{ name: 'ME2 KEY 1 on/off', variableId: 'me_2_key_1' },
+			{ name: 'ME2 KEY 2 on/off', variableId: 'me_2_key_2' },
+			{ name: 'ME2 KEY 3 on/off', variableId: 'me_2_key_3' },
+			{ name: 'ME2 KEY 4 on/off', variableId: 'me_2_key_4' },
+			{ name: 'ME1 KEY 1 DVE on/off', variableId: 'me_1_key_1_dve' },
+			{ name: 'ME1 KEY 2 DVE on/off', variableId: 'me_1_key_2_dve' },
+			{ name: 'ME1 KEY 3 DVE on/off', variableId: 'me_1_key_3_dve' },
+			{ name: 'ME1 KEY 4 DVE on/off', variableId: 'me_1_key_4_dve' },
+			{ name: 'ME2 KEY 1 DVE on/off', variableId: 'me_2_key_1_dve' },
+			{ name: 'ME2 KEY 2 DVE on/off', variableId: 'me_2_key_2_dve' },
+			{ name: 'ME2 KEY 3 DVE on/off', variableId: 'me_2_key_3_dve' },
+			{ name: 'ME2 KEY 4 DVE on/off', variableId: 'me_2_key_4_dve' },
+			{ name: 'ME1 PGM', variableId: 'me_1_pgm_a' },
+			{ name: 'ME1 PRV', variableId: 'me_1_prv_b' },
+			{ name: 'ME2 PGM', variableId: 'me_2_pgm_a' },
+			{ name: 'ME2 PRV', variableId: 'me_2_prv_b' },
+
 		],
-		MES: [{ id: 1, label: 'ME 1' }],
+		MES: [
+			{ id: 1, label: 'ME 1' },
+			{ id: 2, label: 'ME 2' }
+		],
 		KEYS: [
-			{ id: '1,1', label: 'KEY 1' },
-			{ id: '1,2', label: 'KEY 2' },
-			{ id: '1,3', label: 'DSK 1' },
-			{ id: '1,4', label: 'DSK 2' },
+			{ id: '1,1', label: 'ME1 Key1' },
+			{ id: '1,2', label: 'ME1 Key2' },
+			{ id: '1,3', label: 'ME1 Key3' },
+			{ id: '1,4', label: 'ME1 Key4' },
+			{ id: '2,1', label: 'ME2 Key1' },
+			{ id: '2,2', label: 'ME2 Key2' },
+			{ id: '2,3', label: 'ME2 Key3' },
+			{ id: '2,4', label: 'ME2 Key4' },
 		],
 		get SOURCES_ME() {
 			let sources = [
@@ -81,6 +105,8 @@ module.exports = {
 				{ id: 0, label: 'Black' },
 				{ id: 29, label: 'Still 1' },
 				{ id: 30, label: 'Still 2' },
+				{ id: 29, label: 'Still 3' },
+				{ id: 30, label: 'Still 4' },
 				{ id: 37, label: 'Color Bars' },
 				{ id: 38, label: 'Matte 1' },
 				{ id: 39, label: 'Matte 2' },
@@ -94,10 +120,14 @@ module.exports = {
 		get SOURCES_AUX() {
 			let additional = [
 				// Additional AUX-only sources
-				{ id: 46, label: 'Program' },
-				{ id: 47, label: 'Preview' },
-				{ id: 48, label: 'Clean' },
-				{ id: 50, label: 'Multi-View' },
+				{ id: 42, label: 'Program 1' },
+				{ id: 43, label: 'Preview 1' },
+				{ id: 44, label: 'Clean 1' },
+				{ id: 46, label: 'Program 2' },
+				{ id: 47, label: 'Preview 2' },
+				{ id: 48, label: 'Clean 2' },
+				{ id: 54, label: 'Multi-View 1' },
+				{ id: 55, label: 'Multi-View 2' },
 			]
 			return this.SOURCES_ME.concat(additional.sort((a, b) => (a.label > b.label ? 1 : -1)))
 		},
