@@ -14,7 +14,7 @@
 		"url": "git+https://github.com/bitfocus/companion-module-fora-hvs.git"
 	},
 	"dependencies": {
-		"@companion-module/base": "~1.0.2",
+		"@companion-module/base": "~1.4.3",
 		"node-fetch": "^2.6.0",
 		"websocket": "^1.0.34",
 		"ws": "^8.21.0"
